@@ -1,5 +1,5 @@
 PACKAGE_NAME          := github.com/vandot/bee-clef
-GOLANG_CROSS_VERSION  ?= v1.15.3
+GOLANG_CROSS_VERSION  ?= v1.15.7
 
 SYSROOT_DIR     ?= sysroots
 SYSROOT_ARCHIVE ?= sysroots.tar.bz2
@@ -24,7 +24,7 @@ release-dry-run:
 		--mount type=bind,src=/proc,target=/proc \
 		-v `pwd`:/go/src/$(PACKAGE_NAME) \
 		-w /go/src/$(PACKAGE_NAME) \
-		vandot/golang-cross:${GOLANG_CROSS_VERSION} \
+		troian/golang-cross:${GOLANG_CROSS_VERSION} \
 		--rm-dist --skip-validate --skip-publish
 
 .PHONY: release
@@ -44,5 +44,5 @@ release:
 		-v `pwd`:/go/src/$(PACKAGE_NAME) \
 		-v `echo ${HOME}`/.docker/config.json:/root/.docker/config.json \
 		-w /go/src/$(PACKAGE_NAME) \
-		vandot/golang-cross:${GOLANG_CROSS_VERSION} \
+		troian/golang-cross:${GOLANG_CROSS_VERSION} \
 		release --rm-dist
