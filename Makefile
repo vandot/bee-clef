@@ -21,7 +21,7 @@ release-dry-run:
 		-e CGO_ENABLED=1 \
 		--env-file .release-env \
 		-v /var/run/docker.sock:/var/run/docker.sock \
-		-v /proc/sys/fs/binfmt_misc:/proc/sys/fs/binfmt_misc \
+		--mount type=bind,src=/proc/sys/fs/binfmt_misc,target=/proc/sys/fs/binfmt_misc \
 		-v `pwd`:/go/src/$(PACKAGE_NAME) \
 		-w /go/src/$(PACKAGE_NAME) \
 		vandot/golang-cross:${GOLANG_CROSS_VERSION} \
@@ -40,7 +40,7 @@ release:
 		-e CGO_ENABLED=1 \
 		--env-file .release-env \
 		-v /var/run/docker.sock:/var/run/docker.sock \
-		-v /proc/sys/fs/binfmt_misc:/proc/sys/fs/binfmt_misc \
+		--mount type=bind,src=/proc/sys/fs/binfmt_misc,target=/proc/sys/fs/binfmt_misc \
 		-v `pwd`:/go/src/$(PACKAGE_NAME) \
 		-v `echo ${HOME}`/.docker/config.json:/root/.docker/config.json \
 		-w /go/src/$(PACKAGE_NAME) \
